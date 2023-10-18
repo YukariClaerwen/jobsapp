@@ -6,7 +6,7 @@ require("dotenv").config({path: '.env'});
 
 module.exports = {
   client: 'pg',
-  connection: process.env.DATABASE_URL,
+  connection: process.env.POSTGRES_PRISMA_URL,
   migrations: {
     tableName: 'knex_migrations'
   }
