@@ -1,12 +1,14 @@
 // // Update with your config settings.
-require("dotenv").config({path: '.env'});
+require("dotenv").config({path: '.env.development'});
 /**
  * @type { Object.<string, import("knex").Knex.Config> }
  */
 
 module.exports = {
   client: 'pg',
-  connection: process.env.POSTGRES_PRISMA_URL,
+  connection: 
+    process.env.POSTGRES_PRISMA_URL + 
+    (process.env.NODE_ENV === 'development' ? '' : '?sslmode=require'),
   migrations: {
     tableName: 'knex_migrations'
   }
