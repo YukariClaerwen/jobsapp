@@ -10,8 +10,7 @@
     "db:migrate": "knex migrate:latest",
     "db:migrate:make": "knex migrate:make",
     "db:migrate:undo": "knex migrate:down",
-    "db:migrate:rollback": "knex migrate:rollback",
-    "vercel-build": "prisma generate && npm run db:migrate && next build"
+    "db:migrate:rollback": "knex migrate:rollback"
   },
   "dependencies": {
     "@faker-js/faker": "^8.2.0",
