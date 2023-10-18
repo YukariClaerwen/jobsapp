@@ -2,21 +2,30 @@ import Button from '@/components/Button';
 import db from '@/modules/db'
 import { faker } from '@faker-js/faker';
 import { revalidatePath } from 'next/cache';
+import { Prisma } from '@prisma/client'
 
 export default async function Home() {
   const posts = await db.post.findMany({ orderBy: { createdAt: 'desc' } });
 
   const generatePosts = async () => {
     'use server';
+    try {
+      await db.post.createMany({
+        data: [
+          { content: faker.lorem.sentence() },
+          { content: faker.lorem.sentence() },
+          { content: faker.lorem.sentence() },
+        ],
+      });
+      revalidatePath('/');
+    } catch (e) {
+      if (e instanceof Prisma.PrismaClientKnownRequestError) {
+        console.log(e.code);
+      }
+      throw e
+    }
 
-    await db.post.createMany({
-      data: [
-        { content: faker.lorem.sentence() },
-        { content: faker.lorem.sentence() },
-        { content: faker.lorem.sentence() },
-      ],
-    });
-    revalidatePath('/');
+    
   }
 
   return (
