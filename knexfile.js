@@ -7,7 +7,7 @@ require("dotenv").config({path: '.env.development'});
 module.exports = {
   client: 'pg',
   connection: 
-    process.env.POSTGRES_PRISMA_URL + 
+    process.env.POSTGRES_URL + 
     (process.env.NODE_ENV === 'development' ? '' : '?sslmode=require'),
   migrations: {
     tableName: 'knex_migrations'
